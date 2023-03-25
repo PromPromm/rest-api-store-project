@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from flask_smorest import Api
 import os
+from dotenv import load_dotenv
 
 from db import db
 import models
@@ -16,6 +17,7 @@ from resources.user import blp as UserBlueprint
 def create_app():
 
     app = Flask(__name__)  # create a flask object
+    load_dotenv()
 
 # for every GET and POST request, we as the server see the exact opposite i.e for GET we are sending out a resource
 
