@@ -6,7 +6,7 @@ from flask_jwt_extended import create_access_token, jwt_required, get_jwt, get_j
 
 from db import db
 from models import UserModel
-from schemas import UserSchema, UserRegisterSchema
+from schemas import UserSchema
 from blocklist import BLOCKLIST
 
 blp = Blueprint('Users', 'users', description='Operations on users')
@@ -14,7 +14,7 @@ blp = Blueprint('Users', 'users', description='Operations on users')
 @blp.route('/register')
 class UserRegister(MethodView):
 
-    @blp.arguments(UserRegisterSchema)
+    @blp.arguments(UserSchema)
     def post(self, user_data):
         try:
             user=UserModel(username=user_data['username'],
