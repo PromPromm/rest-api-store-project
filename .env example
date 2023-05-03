@@ -1,0 +1,5 @@
+DATABASE_URL='postgres-database-url'
+DEBUG=True
+JWT_SECRET_KEY='jwtsecretkey'
+MAIL_USERNAME='set-as-an-environment variable'
+MAIL_PASSWORD='set-as-an-environment variable'
