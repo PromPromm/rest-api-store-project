@@ -3,13 +3,23 @@ from flask_smorest import Blueprint, abort
 from passlib.hash import pbkdf2_sha256
 from sqlalchemy.exc import IntegrityError
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt, get_jwt_identity, create_refresh_token
+from mail import mail
 
 from db import db
 from models import UserModel
 from schemas import UserSchema, UserRegisterSchema
 from blocklist import BLOCKLIST
+from flask_mail import Message
 
 blp = Blueprint('Users', 'users', description='Operations on users')
+
+def send_register_email(user):
+    msg = Message('Welcome to stores RESTAPI', 
+                  sender='noreply@demo.com',
+                  recipients=[user.email],
+                  body=f'Your account with username {user.username} has been created successfully'
+                  )
+    mail.send(msg)
 
 @blp.route('/register')
 class UserRegister(MethodView):
@@ -23,6 +33,7 @@ class UserRegister(MethodView):
             )
             db.session.add(user)
             db.session.commit()
+            send_register_email(user)
             return {"message": "user created successfully"}
         except IntegrityError:
             abort(409, "A user with that username already exists")
