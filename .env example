@@ -1,0 +1,6 @@
+DATABASE_URL='postgres-database-url'
+DEBUG=True
+JWT_SECRET_KEY='jwtsecretkey'
+MAILGUN_API_KEY='mailgun-api-key'
+MAILGUN_DOMAIN='maildun-domain-link'
+REDIS_URL='redis-url'
